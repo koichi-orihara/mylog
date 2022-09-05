@@ -30,4 +30,26 @@ class FolderController extends Controller
         'id' => $folder->id,
         ]);
     }
+    
+    public function destroy($id) 
+    {
+        // dd($id);
+         // idの値でメッセージを検索して取得
+        $folder = Folder::findOrFail($id);
+        // dd($folder);
+        // フォルダーを削除
+        $a = $folder->delete();
+        // dd($a);
+        // dd($id);
+        $current_folder = Folder::first();
+        // dd($current_folder);
+        
+         if (is_null($current_folder)) {
+            return view('home');
+        } 
+        
+        return redirect()->route('tasks.index', [
+            'id' => $current_folder,
+        ]);
+    }
 }

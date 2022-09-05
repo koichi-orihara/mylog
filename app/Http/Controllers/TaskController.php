@@ -7,7 +7,7 @@ use App\Folder;
 use App\Task;
 use App\Http\Requests\CreateTask;
 use App\Http\Requests\EditTask;
-// ★ Authクラスをインポート
+//Authクラスをインポート
 use Illuminate\Support\Facades\Auth;
 
 
@@ -19,12 +19,14 @@ class TaskController extends Controller
     {
          // すべてのフォルダを取得する
         $folders = Auth::user()->folders()->get();
-        
+        // dd($id);
+        // dd($folders);
         // 選ばれたフォルダを取得する
         $current_folder = Folder::find($id);
-        
+        // dd($current_folder);
         // 選ばれたフォルダに紐づくタスクを取得する
         $tasks = $current_folder->tasks()->get();
+        
         
         return view('tasks/index',[
             'folders' => $folders,
@@ -51,7 +53,7 @@ class TaskController extends Controller
         $task = new Task();
         $task -> title = $request -> title;
         $task -> due_date = $request -> due_date;
-        
+      
         $current_folder->tasks()->save($task);
         
         return redirect()->route('tasks.index', [

@@ -18,6 +18,10 @@
                 >
                   {{ $folder->title }}
                 </a>
+                 {{ Form::open(['method'=>'delete','route'=>['folders.destroy',$folder->id]]) }}
+                    @csrf
+                    {{ Form::submit('削除',['class'=>'btn btn-outline-danger']) }}
+                  {{ Form::close() }}
               @endforeach
             </div>
         </nav>

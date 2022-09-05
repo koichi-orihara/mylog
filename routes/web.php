@@ -18,8 +18,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/folders/{id}/tasks', 'TaskController@index')->name('tasks.index');
     
     //フォルダ作成機能
-    Route::get('/folders/create', 'FolderController@showCreateForm')->name('folders.create');
-    Route::post('/folders/create', 'FolderController@create');
+    Route::get('/folders/create', 'FolderController@showCreateForm');
+    Route::post('/folders/create', 'FolderController@create')->name('folders.create');
+    
+    //フォルダ削除機能
+    Route::delete('/folders/{id}', 'FolderController@destroy')->name('folders.destroy');
     
     //タスクの新規作成機能
     Route::get('/folders/{id}/tasks/create', 'TaskController@showCreateForm')->name('tasks.create');
@@ -28,6 +31,7 @@ Route::group(['middleware' => 'auth'], function() {
     //タスクの編集機能
     Route::get('/folders/{id}/tasks/{task_id}/edit', 'TaskController@showEditForm')->name('tasks.edit');
     Route::post('/folders/{id}/tasks/{task_id}/edit', 'TaskController@edit');
+    
 });
 
 //認証機能用
