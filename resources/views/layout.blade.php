@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ToDo App</title>
-  @yield('styles')
+  @include('share.flatpickr.styles')
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
@@ -39,6 +39,6 @@
     });
   </script>
 @endif
-@yield('scripts')
+@include('share.flatpickr.scripts')
 </body>
 </html>
