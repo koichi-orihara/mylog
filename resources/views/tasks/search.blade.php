@@ -4,7 +4,13 @@
 
   <div class="container">
     <div class="row">
-      
+      <div class="column col-md-8">
+          @isset($search_result)
+        　  <h5 class="card-title">{{ $search_result }}</h5>
+        　@endisset
+      </div>
+    </div>
+    <div class="row">
       <div class="column col-md-8">
         <!-- ここにタスクが表示される -->
         <div class="panel panel-default">
@@ -35,5 +41,20 @@
           </div>
         </div>
       </div>
+      
+      <div class="row">
+       <div class="column col-md-8">
+           {{-- メッセージ作成ページへのリンク --}}
+           {!! link_to_route('tasks.index', '戻る', ['id' => $first_folder_id], ['class' => 'btn btn-primary']) !!}
+       </div>
+      </div>
+      
+      <div class="row">
+       <div class="column col-md-8">
+           {{ $tasks->links() }}
+       </div>
+      </div>
+      
     </div>
+    
 @endsection

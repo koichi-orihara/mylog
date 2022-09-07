@@ -26,7 +26,7 @@ class TaskController extends Controller
         // dd($current_folder);
         // 選ばれたフォルダに紐づくタスクを取得する
         $tasks = $current_folder->tasks()->get();
-        
+        $tasks = Task::sortable()->get();
         
         return view('tasks/index',[
             'folders' => $folders,
@@ -97,12 +97,15 @@ class TaskController extends Controller
         
         // dd($tasks);
 
-        // $search_result = $request->search.'の検索結果'.$posts->total().'件';
+        $search_result = $request->search.'の検索結果：'.$tasks->total().'件';
 
+        $first_folder_id = Folder::first();
+        // dd($tasks->total());
         return view('tasks.search', [
             'tasks' => $tasks,
-            // 'search_result' => $search_result,
+            'search_result' => $search_result,
             // 'search_query'  => $request->search
+            'first_folder_id' => $first_folder_id,
         ]);
     }
 

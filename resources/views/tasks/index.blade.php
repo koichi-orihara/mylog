@@ -4,14 +4,16 @@
 <div class="card-body">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+          <div class="col-md-4">
+          </div>
+            <div class="col-md-8">
                 <h5 class="card-title">検索フォーム</h5>
                 <div id="custom-search-input">
                     <div class="input-group col-md-12">
                         <form action="{{ route('tasks.search') }}" method="get">
 
-                            <input type="text" class="form-control input-lg" placeholder="Buscar" name="search" value="">
-                            <span class="input-group-btn" style="position: relative;top: -36px;right: -179px;">
+                            <input type="text" class="form-control input-lg" placeholder="タスク名" name="search" value="">
+                            <span class="input-group-btn" style="position: relative;top: -36px;right: -700px;">
                                 <button class="btn btn-info" type="submit">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -63,9 +65,9 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>タイトル</th>
-                  <th>状態</th>
-                  <th>期限</th>
+                  <th>@sortablelink('title', 'タイトル')</th>
+                  <th>@sortablelink('status', '状態')</th>
+                  <th>@sortablelink('due_date', '期限')</th>
                   <th></th>
                 </tr>
               </thead>
