@@ -32,6 +32,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/folders/{id}/tasks/{task_id}/edit', 'TaskController@showEditForm')->name('tasks.edit');
     Route::post('/folders/{id}/tasks/{task_id}/edit', 'TaskController@edit');
     
+    //タスク検索機能
+    Route::get('/tasks/search', 'TaskController@search')->name('tasks.search');
 });
 
 //認証機能用

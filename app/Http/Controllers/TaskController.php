@@ -88,5 +88,22 @@ class TaskController extends Controller
             'id' => $task->folder_id,
         ]);
     }
+    
+    public function search(Request $request)
+    {
+
+        $tasks = Task::where('title', 'like', "%{$request->search}%")
+                ->paginate(3);
+        
+        // dd($tasks);
+
+        // $search_result = $request->search.'の検索結果'.$posts->total().'件';
+
+        return view('tasks.search', [
+            'tasks' => $tasks,
+            // 'search_result' => $search_result,
+            // 'search_query'  => $request->search
+        ]);
+    }
 
 }

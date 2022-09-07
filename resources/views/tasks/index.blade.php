@@ -8,7 +8,7 @@
                 <h5 class="card-title">検索フォーム</h5>
                 <div id="custom-search-input">
                     <div class="input-group col-md-12">
-                        <form action="#" method="get">
+                        <form action="{{ route('tasks.search') }}" method="get">
 
                             <input type="text" class="form-control input-lg" placeholder="Buscar" name="search" value="">
                             <span class="input-group-btn" style="position: relative;top: -36px;right: -179px;">
@@ -35,7 +35,7 @@
               </a>
             </div>
             <div class="list-group">
-              @foreach($folders as $folder)
+              @foreach ($folders as $folder)
                 <a href="{{ route('tasks.index', ['id' => $folder->id]) }}"
                 class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }}"
                 >
