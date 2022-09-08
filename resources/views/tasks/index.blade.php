@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('content')
-<div class="card-body">
     <div class="container">
         <div class="row">
           <div class="col-md-4">
@@ -36,7 +35,28 @@
                 フォルダを追加する
               </a>
             </div>
-            <div class="list-group">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>@sortablelink('title', 'タイトル')</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($folders as $folder)
+                  <tr>
+                    <td>
+                      <a href="{{ route('tasks.index', ['id' => $folder->id]) }}"
+                      class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }}"
+                      >
+                        {{ $folder->title }}
+                      </a>
+                    </td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+            {{-- <div class="list-group">
               @foreach ($folders as $folder)
                 <a href="{{ route('tasks.index', ['id' => $folder->id]) }}"
                 class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }}"
@@ -48,7 +68,7 @@
                     {{ Form::submit('削除',['class'=>'btn btn-outline-danger']) }}
                   {{ Form::close() }}
               @endforeach
-            </div>
+            </div> --}}
         </nav>
       </div>
       <div class="column col-md-8">
@@ -74,12 +94,13 @@
               <tbody>
                 @foreach($tasks as $task)
                   <tr>
-                    <td>{{ $task->title }}</td>
+                    {{-- <td>{!! link_to_route('tasks.show', {{ $task->title }}, ['id' => $task->folder_id, 'task_id' => $task->id], ['class' => 'btn btn-primary']) !!}</td> --}}
+                    <td><a href="{{ route('tasks.show', ['id' => $task->folder_id, 'task_id' => $task->id]) }}">{{ $task->title }}</a></td> 
                     <td>
                       <span class="label {{ $task->status_class }}">{{ $task->status_label }}</span>
                     </td>
                     <td>{{ $task->formatted_due_date }}</td>
-                    <td><a href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}">編集</a></td>
+                    <td><a href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}">編集</a></td> 
                   </tr>
                 @endforeach
               </tbody>

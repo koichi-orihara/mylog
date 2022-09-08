@@ -18,6 +18,7 @@ class TaskController extends Controller
     public function index($id)
     {
          // すべてのフォルダを取得する
+        // $folders = Folder::sortable()->get();
         $folders = Auth::user()->folders()->get();
         // dd($id);
         // dd($folders);
@@ -25,15 +26,29 @@ class TaskController extends Controller
         $current_folder = Folder::find($id);
         // dd($current_folder);
         // 選ばれたフォルダに紐づくタスクを取得する
+        // $tasks = Task::sortable()->get();
         $tasks = $current_folder->tasks()->get();
-        $tasks = Task::sortable()->get();
-        
+        // dd($tasks);
+        // $tasks = $current_folder->tasks()->get();
+        // dd($tasks);
+        // $tasks = Folder::with(['tasks'])->sortable()->find($id)->get(); 
+        // dd($tasks);
         return view('tasks/index',[
             'folders' => $folders,
             'current_folder_id' => $id,
             'tasks' => $tasks,
         ]);
     }
+    
+    public function show($id, $task_id)
+    {
+         $task = Task::find($task_id);
+
+        return view('tasks/show', [
+            'task' => $task,
+        ]);
+    }
+    
     
     /**
     * GET /folders/{id}/tasks/create
@@ -93,14 +108,14 @@ class TaskController extends Controller
     {
 
         $tasks = Task::where('title', 'like', "%{$request->search}%")
-                ->paginate(3);
+                ->paginate(10);
         
         // dd($tasks);
 
-        $search_result = $request->search.'の検索結果：'.$tasks->total().'件';
+        $search_result = '検索結果：'.$tasks->total().'件';
 
         $first_folder_id = Folder::first();
-        // dd($tasks->total());
+        
         return view('tasks.search', [
             'tasks' => $tasks,
             'search_result' => $search_result,

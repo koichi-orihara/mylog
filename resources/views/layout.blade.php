@@ -14,12 +14,24 @@
     <a class="my-navbar-brand" href="/">ToDo App</a>
     <div class="my-navbar-control">
       @if(Auth::check())
-        <span class="my-navbar-item">ようこそ, {{ Auth::user()->name }}さん</span>
-        ｜
-        <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-          @csrf
-        </form>
+        {{-- ユーザ一覧ページへのリンク --}}
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                {{-- ユーザ詳細ページへのリンク --}}
+                <li class="dropdown-item">{!! link_to_route('users.index', 'プロフィール', ['id' => Auth::id()]) !!}</li>
+                {{-- お気に入り一覧ページへのリンク --}}
+                {{-- <li class="dropdown-item">{!! link_to_route('users.favorites', 'お気に入り', ['id' => Auth::id()]) !!}</li> --}}
+                <li class="dropdown-divider"></li>
+                {{-- ログアウトへのリンク --}}
+                <li class="dropdown-item">
+                  <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                  </form>
+                </li>
+              </ul>
+        </li>
       @else
         <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
         ｜

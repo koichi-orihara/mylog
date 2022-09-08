@@ -45,7 +45,7 @@
       <div class="row">
        <div class="column col-md-8">
            {{-- メッセージ作成ページへのリンク --}}
-           {!! link_to_route('tasks.index', '戻る', ['id' => $first_folder_id], ['class' => 'btn btn-primary']) !!}
+           <button class="btn btn-primary" type="button" onClick="history.back()">戻る</button>
        </div>
       </div>
       
