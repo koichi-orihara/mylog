@@ -4,32 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use Kyslik\ColumnSortable\Sortable; 
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
-    use Sortable;   
+   use SoftDeletes;
     
     // テーブル名を明示
     protected $table = 'tasks';
     
-    //  //可変項目
-    //     protected $fillable = 
-    //     [
-    //         'date',
-    //         'subject',
-    //         'sum',
-    //         'user_id'
-    //     ];
-        
-    ///ソートに使うカラムを指定
-    public $sortable = 
-        [
-            'title',
-            'status',
-            'due_date',
-        ];
-        
     //状態定義
     const STATUS = [
     1 => [ 'label' => '未着手', 'class' => 'label-danger' ],

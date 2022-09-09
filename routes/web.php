@@ -59,6 +59,18 @@ Route::group(['middleware' => 'auth'], function() {
     //ソート(期限昇順)
     Route::get('/folders/{id}/tasks/dueDateDesc', 'TaskController@dueDateDesc')->name('tasks.dueDateDesc');
     
+    //論理削除
+    Route::get('/folders/{id}/tasks/{task_id}/softDelete', 'TaskController@softDelete')->name('tasks.softDelete');
+    
+    //ゴミ箱一覧
+    Route::get('/softDeleteShow', 'TaskController@softDeleteShow')->name('tasks.softDeleteShow');
+    
+    //ゴミ箱から復元
+    Route::get('/folders/{id}/tasks/{task_id}/restore', 'TaskController@restore')->name('tasks.restore');
+    
+    //ゴミ箱から削除
+    Route::get('/folders/{id}/tasks/{task_id}/physicalDelete', 'TaskController@physicalDelete')->name('tasks.physicalDelete');
+
 });
 
 //認証機能用

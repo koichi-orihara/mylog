@@ -109,8 +109,10 @@
                     </td>
                     <td>{{ $task->formatted_due_date }}</td>
                     <td><a href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}">編集</a></td> 
+                    <td><a href="{{ route('tasks.softDelete', ['id' => $task->folder_id, 'task_id' => $task->id]) }}"><i class="fas fa-trash-alt"></i></a></td>
                   </tr>
                 @endforeach
+                <tr><td></td><a href="{{ route('tasks.softDeleteShow',[]) }}"><i class="fas fa-trash-alt"></i>ゴミ箱</a></td></tr>
               </tbody>
             </table>
           </div>

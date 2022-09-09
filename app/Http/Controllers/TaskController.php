@@ -97,6 +97,43 @@ class TaskController extends Controller
         ]);
     }
     
+    public function softDelete($id, $task_id)
+    {
+        $task = Task::find($task_id);
+        
+        $task->delete();
+        
+        return redirect('/folders/1/tasks')->with('flash_msg','削除が完了しました。');;
+    }
+    
+    public function softDeleteShow()
+    {
+        // 論理削除されたデータのみ取得
+        $tasks = Task::onlyTrashed()->get();
+        
+        return view('tasks.softDeleteShow',[
+            'tasks' => $tasks
+        ]);
+        
+    }
+    
+    public function restore($id, $task_id)
+    {
+        // dd($task_id);
+        // 対象のデータを復元する
+        $task = Task::onlyTrashed()->find($task_id)->restore();
+        
+        return redirect('/softDeleteShow')->with('flash_msg','復元が完了しました。');;
+    }
+    
+    public function physicalDelete($id, $task_id)
+    {
+        // 対象のデータを物理削除する
+        Task::onlyTrashed()->find($task_id)->forceDelete();
+        
+        return redirect('/softDeleteShow')->with('flash_msg','削除が完了しました。');;
+    }
+    
     public function search(Request $request)
     {
 
