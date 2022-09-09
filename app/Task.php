@@ -4,9 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
+   use SoftDeletes;
+    
+    // テーブル名を明示
+    protected $table = 'tasks';
+    
     //状態定義
     const STATUS = [
     1 => [ 'label' => '未着手', 'class' => 'label-danger' ],
