@@ -17,22 +17,15 @@ class TaskController extends Controller
 
     public function index($id)
     {
-         // すべてのフォルダを取得する
-        // $folders = Folder::sortable()->get();
+        // すべてのフォルダを取得する
         $folders = Auth::user()->folders()->get();
-        // dd($id);
-        // dd($folders);
+        
         // 選ばれたフォルダを取得する
         $current_folder = Folder::find($id);
-        // dd($current_folder);
+        
         // 選ばれたフォルダに紐づくタスクを取得する
-        // $tasks = Task::sortable()->get();
         $tasks = $current_folder->tasks()->get();
-        // dd($tasks);
-        // $tasks = $current_folder->tasks()->get();
-        // dd($tasks);
-        // $tasks = Folder::with(['tasks'])->sortable()->find($id)->get(); 
-        // dd($tasks);
+        
         return view('tasks/index',[
             'folders' => $folders,
             'current_folder_id' => $id,
@@ -121,6 +114,78 @@ class TaskController extends Controller
             'search_result' => $search_result,
             // 'search_query'  => $request->search
             'first_folder_id' => $first_folder_id,
+        ]);
+    }
+    
+    public function statusAsc($id)
+    {
+        // すべてのフォルダを取得する
+        $folders = Auth::user()->folders()->get();
+        
+        // 選ばれたフォルダを取得する
+        $current_folder = Folder::find($id);
+       
+        // 選ばれたフォルダに紐づくタスクを取得する
+        $tasks = $current_folder->tasks()->orderBy('status', 'asc')->get();
+        
+        return view('tasks/index',[
+            'folders' => $folders,
+            'current_folder_id' => $id,
+            'tasks' => $tasks,
+        ]);
+    }
+    
+    public function statusDesc($id)
+    {
+        // すべてのフォルダを取得する
+        $folders = Auth::user()->folders()->get();
+        
+        // 選ばれたフォルダを取得する
+        $current_folder = Folder::find($id);
+       
+        // 選ばれたフォルダに紐づくタスクを取得する
+        $tasks = $current_folder->tasks()->orderBy('status', 'desc')->get();
+        
+        return view('tasks/index',[
+            'folders' => $folders,
+            'current_folder_id' => $id,
+            'tasks' => $tasks,
+        ]);
+    }
+    
+    public function dueDateAsc($id)
+    {
+        // すべてのフォルダを取得する
+        $folders = Auth::user()->folders()->get();
+        
+        // 選ばれたフォルダを取得する
+        $current_folder = Folder::find($id);
+       
+        // 選ばれたフォルダに紐づくタスクを取得する
+        $tasks = $current_folder->tasks()->orderBy('due_date', 'asc')->get();
+        
+        return view('tasks/index',[
+            'folders' => $folders,
+            'current_folder_id' => $id,
+            'tasks' => $tasks,
+        ]);
+    }
+    
+    public function dueDateDesc($id)
+    {
+        // すべてのフォルダを取得する
+        $folders = Auth::user()->folders()->get();
+        
+        // 選ばれたフォルダを取得する
+        $current_folder = Folder::find($id);
+       
+        // 選ばれたフォルダに紐づくタスクを取得する
+        $tasks = $current_folder->tasks()->orderBy('due_date', 'desc')->get();
+        
+        return view('tasks/index',[
+            'folders' => $folders,
+            'current_folder_id' => $id,
+            'tasks' => $tasks,
         ]);
     }
 

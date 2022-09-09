@@ -38,7 +38,7 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>@sortablelink('title', 'タイトル')</th>
+                  <th>タイトル</th>
                   <th></th>
                 </tr>
               </thead>
@@ -56,19 +56,6 @@
                 @endforeach
               </tbody>
             </table>
-            {{-- <div class="list-group">
-              @foreach ($folders as $folder)
-                <a href="{{ route('tasks.index', ['id' => $folder->id]) }}"
-                class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }}"
-                >
-                  {{ $folder->title }}
-                </a>
-                 {{ Form::open(['method'=>'delete','route'=>['folders.destroy',$folder->id]]) }}
-                    @csrf
-                    {{ Form::submit('削除',['class'=>'btn btn-outline-danger']) }}
-                  {{ Form::close() }}
-              @endforeach
-            </div> --}}
         </nav>
       </div>
       <div class="column col-md-8">
@@ -85,10 +72,31 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>@sortablelink('title', 'タイトル')</th>
-                  <th>@sortablelink('status', '状態')</th>
-                  <th>@sortablelink('due_date', '期限')</th>
-                  <th></th>
+                  <th>タイトル</th>
+                  <th>
+                    <div class="dropdown">
+                      <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        状態
+                      </a>
+
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="{{ route('tasks.statusAsc', ['id' => $current_folder_id]) }}">昇順</a>
+                        <a class="dropdown-item" href="{{ route('tasks.statusDesc', ['id' => $current_folder_id]) }}">降順</a>
+                      </div>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="dropdown">
+                      <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        期限
+                      </a>
+
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="{{ route('tasks.dueDateAsc', ['id' => $current_folder_id]) }}">早い順</a>
+                        <a class="dropdown-item" href="{{ route('tasks.dueDateDesc', ['id' => $current_folder_id]) }}">遅い順</a>
+                      </div>
+                    </div>
+                  </th>
                 </tr>
               </thead>
               <tbody>

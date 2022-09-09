@@ -47,6 +47,18 @@ Route::group(['middleware' => 'auth'], function() {
     //ユーザー情報編集画面
     Route::get('/users/{id}/edit', 'UserController@edit')->name('users.edit');
     
+    //ソート(ステータス昇順)
+    Route::get('/folders/{id}/tasks/statusAsc', 'TaskController@statusAsc')->name('tasks.statusAsc');
+    
+    //ソート(ステータス降順)
+    Route::get('/folders/{id}/tasks/statusDesc', 'TaskController@statusDesc')->name('tasks.statusDesc');
+    
+    //ソート(期限昇順)
+    Route::get('/folders/{id}/tasks/dueDateAsc', 'TaskController@dueDateAsc')->name('tasks.dueDateAsc');
+    
+    //ソート(期限昇順)
+    Route::get('/folders/{id}/tasks/dueDateDesc', 'TaskController@dueDateDesc')->name('tasks.dueDateDesc');
+    
 });
 
 //認証機能用
